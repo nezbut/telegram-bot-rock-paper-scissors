@@ -29,24 +29,21 @@ async def user_answer_game_elements(message: Message):
     if message.from_user.id in UsersInGame.USERS:
         bot_answer = choice(LEXICON_RU['game_elements'])
         user_win = user_winner(bot_answer=bot_answer, user_answer=message.text)
+        lexicon_key = None
 
         await message.answer(f"{LEXICON_RU['bot_answer']}: {bot_answer}")
 
         if user_win:
-            await message.answer(
-                LEXICON_RU['user_won'],
-                reply_markup=get_keyboard_yes_and_no()
-            )
+            lexicon_key = 'user_won'
 
         elif user_win is None:
-            await message.answer(
-                LEXICON_RU['nobody_won'],
-                reply_markup=get_keyboard_yes_and_no()
-            )
+            lexicon_key = 'nobody_won'
 
         else:
-            await message.answer(
-                LEXICON_RU['bot_won'],
+            lexicon_key = 'bot_won'
+
+        await message.answer(
+                LEXICON_RU[lexicon_key],
                 reply_markup=get_keyboard_yes_and_no()
             )
 
