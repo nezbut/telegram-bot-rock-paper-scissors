@@ -1,0 +1,1 @@
+# Small telegram bot for the game: "Rock Paper Scissors"
